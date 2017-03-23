@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+        function isEven(n) {
+            if (n==0)
+                return true;
+            else if (n==1)
+                return false;
+            else if(n > 0)
+                return isEven(n - 2);
+            else
+                return isEven(-n);
+            
+        }
+        console.log(isEven(2));
+        console.log(isEven(3));
+        console.log(isEven(-12));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
