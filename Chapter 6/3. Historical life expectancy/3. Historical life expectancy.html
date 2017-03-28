@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <script src="../05_higher_order/code/ancestry.js"></script>
+    <script src="../05_higher_order/code/chapter/05_higher_order.js"></script>
+    <script src="../05_higher_order/code/intro.js"></script>
+    <script type="text/javascript">
+        function average(array) {
+            function plus(a, b) {
+                return a + b;
+            }
+            return array.reduce(plus) / array.length;
+        }
+        
+        var byName = {};
+        ancestry.forEach(function(person) {
+            person.century = Math.ceil(person.died / 100);
+            if (byName[person.century] == undefined) {
+                byName[person.century] = [person.died - person.born];
+            } else {
+                byName[person.century].push(person.died - person.born);
+            }
+        });
+        var cent = {};
+        for (var i in byName) {
+            cent[i] = average(byName[i]);
+        }
+        console.log(cent);
+        
+        //Second variant with GroupBy method
+
+        function groupBy(array, rule) {
+            var groups = {};
+            array.forEach(function(el) {
+                var groupName = rule(el);
+                if (groupName in groups)
+                    groups[groupName].push(el);
+                else
+                    groups[groupName] = [el];
+            });
+            return groups;
+        };
+
+        var byCentury = groupBy(ancestry, function(person) {
+            return Math.ceil(person.died / 100);
+        });
+        for (var century in byCentury) {
+            var ages = byCentury[century].map(function(person) {
+                return person.died - person.born;
+            });
+            console.log(century + ": " + average(ages));
+        }
+        
+        // → 16: 43.5
+        //   17: 51.2
+        //   18: 52.8
+        //   19: 54.8
+        //   20: 84.7
+        //   21: 94
+
+        // → 31.2
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

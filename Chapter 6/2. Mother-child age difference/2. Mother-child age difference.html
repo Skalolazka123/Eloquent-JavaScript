@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <script src="../05_higher_order/code/ancestry.js"></script>
+    <script src="../05_higher_order/code/chapter/05_higher_order.js"></script>
+    <script src="../05_higher_order/code/intro.js"></script>
+    <script type="text/javascript">
+        function average(array) {
+            function plus(a, b) {
+                return a + b;
+            }
+            return array.reduce(plus) / array.length;
+        }
+
+        var byName = {};
+        ancestry.forEach(function(person) {
+            byName[person.name] = person;
+        });
+
+        var diff = ancestry.filter(function (person) {
+                return byName[person.mother] != null;
+        }).map(function(person){
+            return person.born - byName[person.mother].born;
+        });
+        console.log(average(diff));
+
+        // → 31.2
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
