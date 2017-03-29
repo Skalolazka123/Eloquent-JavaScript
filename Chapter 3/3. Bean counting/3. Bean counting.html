@@ -1,0 +1,32 @@
+
+<html>
+
+<head>
+    <script type="text/javascript">
+        function countBs(str) {
+            var count = 0;
+            for(var i = 0; i < str.length; i++){
+                if(str.charAt(i)==="B")
+                    count++;
+            }
+            return count;
+            
+        }
+        function countChar(str, symbol) {
+            var count = 0;
+            for(var i = 0; i < str.length; i++){
+                if(str.charAt(i) === symbol)
+                    count++;
+            }
+            return count;
+        }
+        console.log(countBs("BBCBB"));
+        console.log(countChar("kakkerlakklak", "k"));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
