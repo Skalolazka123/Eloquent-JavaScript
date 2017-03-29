@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+        // Your code here.
+
+        /*
+        Object ArraySeq
+        methods: go - next step
+                current - current value
+         */
+        function ArraySeq(arr) {
+            this.j = 0;
+            this.arr = arr;
+        }
+        ArraySeq.prototype.go = function() {
+            if (this.j >= this.arr.length)
+                return false;
+            this.j++;
+            return true;
+        }
+        ArraySeq.prototype.current = function() {
+            return this.arr[this.j - 1];
+        }
+
+        /*
+        Object RangeSeq 
+        methods: go - next step
+                current - current value
+        */
+
+        function RangeSeq(from, to) {
+            this.from = from;
+            this.to = to;
+        }
+        RangeSeq.prototype.go = function() {
+            if (this.from >= this.to)
+                return false;
+            this.from++;
+            return true;
+        }
+        RangeSeq.prototype.current = function() {
+            return this.from - 1;
+        }
+
+        // function logFive(seq) show first 5 elements from sequence
+        function logFive(seq) {
+            for (var i = 0; i < 5; i++) {
+                if (!seq.go())
+                    break;
+                console.log(seq.current());
+            }
+
+        }
+        logFive(new ArraySeq([1, 2]));
+        // → 1
+        // → 2
+        logFive(new RangeSeq(100, 1000));
+        // → 100
+        // → 101
+        // → 102
+        // → 103
+        // → 104
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
