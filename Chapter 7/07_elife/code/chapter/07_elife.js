@@ -375,10 +375,9 @@ World.prototype.isGoodTime = function(critter) {
             else if (item instanceof Plant)
                 actedPlant++;
         });
-        if(critter instanceof SmartCritterEater && SmartCritterEater * 4 > actedSmartPlantEater) {
+        if (critter instanceof SmartCritterEater && actedSmartCritterEater * 4 > actedSmartPlantEater) {
             isGoodTime = false;
-        }
-        else if (critter instanceof SmartPlantEater && actedSmartPlantEater * 4 > actedPlant)
+        } else if (critter instanceof SmartPlantEater && actedSmartPlantEater * 3 > actedPlant)
             isGoodTime = false;
     }
     return isGoodTime;
@@ -487,14 +486,14 @@ PlantEater.prototype.act = function(view) {
 
 // Ваш код
 function SmartPlantEater() {
-    PlantEater.call(this);
+    this.energy = 30;
     this.direction = "n";
 }
 SmartPlantEater.prototype = Object.create(PlantEater.prototype);
 SmartPlantEater.prototype.act = function(view, isGoodTime) {
     var space = view.find(" ");
 
-    if (this.energy > 30 && space && isGoodTime)
+    if (this.energy > 90 && space && isGoodTime)
         return {
             type: "reproduce",
             direction: space
@@ -521,15 +520,14 @@ Object SmartCritterEater()
         act(view)
 */
 function SmartCritterEater() {
-    PlantEater.call(this);
+    this.energy = 100;
     this.direction = "n";
 }
-SmartCritterEater.prototype = Object.create(PlantEater.prototype);
 
 SmartCritterEater.prototype.act = function(view, isGoodTime) {
     var space = view.find(" ");
-    
-    if (this.energy > 100 && space && isGoodTime)
+
+    if (this.energy > 150 && space && isGoodTime)
         return {
             type: "reproduce",
             direction: space
