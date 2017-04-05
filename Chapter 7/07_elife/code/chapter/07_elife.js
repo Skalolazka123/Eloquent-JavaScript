@@ -527,7 +527,7 @@ function SmartCritterEater() {
 SmartCritterEater.prototype.act = function(view, isGoodTime) {
     var space = view.find(" ");
 
-    if (this.energy > 150 && space && isGoodTime)
+    if (this.energy > 200 && space && isGoodTime)
         return {
             type: "reproduce",
             direction: space
