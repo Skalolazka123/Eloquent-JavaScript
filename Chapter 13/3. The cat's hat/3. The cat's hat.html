@@ -1,33 +1,30 @@
-<html>
+<!doctype html>
 
-<head>
-    <script type="text/javascript">
-        // Your code here.
-        var month = function() {
-            var names = ["January", "February", "March", "April", "May",
-                "June", "July", "August", "September", "October",
-                "November", "December"
-            ];
-            return {
-                name: function(number) {
-                    return names[number];
-                },
-                number: function(name) {
-                    return names.indexOf(name);
-                }
-            };
+<img src="http://eloquentjavascript.net/img/cat.png" id="cat" style="position: absolute">
+<img src="http://eloquentjavascript.net/img/hat.png" id="hat" style="position: absolute">
 
+<script>
+    var cat = document.querySelector("#cat");
+    var hat = document.querySelector("#hat");
+    // Your code here.
+    animate(10);
+    var angle = 0,
+        lastTime = null;
 
-        }();
-        console.log(month.name(2));
-        // → March
-        console.log(month.number("November"));
-        // → 10
-    </script>
-</head>
+    function animate(time) {
+        if (lastTime != null) {
+            angle += (time - lastTime) * 0.001;
+            hat.style.top = (Math.sin(angle) * 80) + "px";
+            cat.style.top = "90px";
+            cat.style.left = (Math.abs(Math.cos(angle+1.4)) * 500) + "px";
+            hat.style.left = (Math.abs(Math.cos(angle)) * 500) + "px";
+        } else {
+            cat.style.left = "0px";
+            hat.style.left = "500px";
+        }
+        lastTime = time;
+        requestAnimationFrame(animate);
 
-<body>
-
-</body>
-
-</html>
+    }
+    equestAnimationFrame(animate);
+</script>
