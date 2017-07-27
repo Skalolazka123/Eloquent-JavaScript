@@ -1,33 +1,42 @@
-<html>
+<!doctype html>
 
-<head>
-    <script type="text/javascript">
-        // Your code here.
-        var month = function() {
-            var names = ["January", "February", "March", "April", "May",
-                "June", "July", "August", "September", "October",
-                "November", "December"
-            ];
-            return {
-                name: function(number) {
-                    return names[number];
-                },
-                number: function(name) {
-                    return names.indexOf(name);
-                }
-            };
+<h1>Heading with a <span>span</span> element.</h1>
+<p>A paragraph with <span>one</span>, <span>two</span>
+  spans.</p>
 
+<script>
+  
+  function byTagName(node, tagName, array) {
+    // Your code here.
+      var childens = node.childNodes;
+      
+      //If array was not create - it's a first time and we must create a new array
+      if(!array){
+          array = new Array();
+      }
+      
+      childens.forEach(function(children) {
+          
+          //main logic. simular getElementsByTagName() method
+          if (children && tagName && children.tagName == tagName.toUpperCase()) {
+              array.push(children);
+          }
+          
+          //If children has a child - we must call byTagName function again 
+            //(until variable children will not have children nodes)
+          if(children.hasChildNodes()) {
+             byTagName(children, tagName, array);
+          }
+          
+      });
+      return array;
+  }
 
-        }();
-        console.log(month.name(2));
-        // → March
-        console.log(month.number("November"));
-        // → 10
-    </script>
-</head>
-
-<body>
-
-</body>
-
-</html>
+  console.log(byTagName(document.body, "h1").length);
+  // → 1
+  console.log(byTagName(document.body, "span").length);
+  // → 3
+  var para = document.querySelector("p");
+  console.log(byTagName(para, "span").length);
+  // → 2
+</script>
