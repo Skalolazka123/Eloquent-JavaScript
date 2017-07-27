@@ -1,0 +1,72 @@
+<!doctype html>
+<script src="code/mountains.js"></script>
+<script src="code/chapter/13_dom.js"></script>
+
+<style>
+    /* Defines a cleaner look for tables */
+    
+    table {
+        border-collapse: collapse;
+    }
+    
+    td,
+    th {
+        border: 1px solid black;
+        padding: 3px 8px;
+    }
+    
+    th {
+        text-align: left;
+    }
+</style>
+
+<script>
+    window.onload = buildTable(MOUNTAINS);
+    window.onload = function() {
+        document.body.appendChild(buildTable(MOUNTAINS));
+    }
+
+    function buildTable(data) {
+        // Your code here.
+        var tbl = document.createElement("table");
+        if (data) {
+
+            //Get name of object properties
+            var fields = Object.keys(data[0]);
+
+            if (fields) {
+
+                //Create header for table
+                var tr = document.createElement("tr");
+                tbl.appendChild(tr);
+                fields.forEach(function(field) {
+                    var th = document.createElement("th");
+                    th.innerHTML = field;
+                    tr.appendChild(th);
+                });
+
+                //Create fields for table
+                data.forEach(function(obj) {
+                    
+                    //new row
+                    tr = document.createElement("tr");
+                    tbl.appendChild(tr);
+                    fields.forEach(function(field) {
+                        for (var key in obj) {
+                            
+                            // if object property name === field name - create new cell
+                            if (key === field) {
+                                var td = document.createElement("td");
+                                td.innerHTML = obj[key];
+                                tr.appendChild(td);
+                            }
+                        }
+                    });
+                });
+            }
+        }
+        return tbl;
+
+
+    }
+</script>
