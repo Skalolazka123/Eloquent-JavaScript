@@ -58,6 +58,9 @@
                             if (key === field) {
                                 var td = document.createElement("td");
                                 td.innerHTML = obj[key];
+                                if(typeof obj[key] == "number") {
+                                    td.style.textAlign = "right";
+                                }
                                 tr.appendChild(td);
                             }
                         }
